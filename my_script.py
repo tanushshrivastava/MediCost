@@ -25,7 +25,7 @@ def process_input(input1, input2, input3):
         comparison_result = 'equal to'
     
     # Return the result
-    tableResult = createTable(input1, input2)
+    createTable(input1, input2)
     
     preString = f"The cost of your {input1} in {input2} is {comparison_result} the average cost. (Average: ${average_cost:,.2f}, Your Input: ${input_cost:,.2f})" 
     if comparison_result == 'greater than':
@@ -40,6 +40,8 @@ def createTable(procedureInput, stateInput):
     
 
     tableVar = tabulate(df, headers='keys', tablefmt='pretty')
-
+    file_object = open("templates/viewData.txt", "w")
+    file_object.write(tableVar)
+    file_object.close()
     return tableVar
 
