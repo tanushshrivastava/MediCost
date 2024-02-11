@@ -1,0 +1,80 @@
+<!-- your_template.html -->
+<!DOCTYPE html>
+<style>
+    body, html {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        text-align: center; /* Center align text for better readability */
+    }
+
+    h1 {
+        color: #005a87;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #333;
+        line-height: 1.5;
+        margin-bottom: 15px; /* Add space between paragraphs */
+    }
+
+    .result-section {
+        background-color: #e7f5ff;
+        padding: 15px;
+        border-left: 5px solid #005a87;
+        border-radius: 5px;
+        margin-bottom: 20px; /* Space between result sections */
+    }
+
+    .warning {
+        color: #b00; /* Color for warnings or errors */
+    }
+
+    .back-link {
+        display: block;
+        width: fit-content;
+        position: absolute;
+        top:20px;
+        left:20px;
+        margin: 0 auto 20px; /* Center the link and add space below */
+        background-color: #005a87;
+        color: white;
+        padding: 8px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+        text-align:left;
+    }
+
+    .back-link:hover {
+        background-color: #00415a;
+    }
+</style>
+<a href="interpret" class="back-link">     Back    </a>
+<html>
+  
+
+<head class = "h1">
+    View Procedure Cost in Different States
+</head>
+<body>
+    <h1></h1>
+    <!-- Display the content of the .txt file -->
+    <pre>{{ text_content }}</pre> <!-- Use the <pre> tag to preserve whitespace and formatting -->
+</body>
+</html>
+
+
+
