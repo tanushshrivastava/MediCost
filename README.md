@@ -20,3 +20,5 @@ pip install tabulator
 then run python3 main.py
 
 Follow On Screen Instructions
+
+https://devfolio.co/projects/medicost-69f9
