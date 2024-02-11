@@ -35,8 +35,11 @@ def home():
         input3 = request.form['cost']
         if "$" in input3:
             input3 = input3[1:]
-        result = process_input(input1, input2, input3)  # Adjusted to handle three inputs
-        return render_template('index.html', variable=result)
+        if len(input2)>2:
+            input2 = entries.state_abbreviations[input2]
+        result = process_input(str(input1), str(input2), str(input3))
+        texts = [result]
+        return render_template('home.html', extracted_texts=texts)
     return render_template('index.html')
 
 
@@ -56,32 +59,27 @@ def upload_file():
         state = ''
         cost = ''
         procedure = ''
+        # Mapping of state full names to their abbreviations
+
+
+
+
         for text in texts:
-            if text in ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
-                        'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
-                        'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
-                        'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
-                        'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']:
+            # Check if text is already an abbreviation
+            if text in entries.state_abbreviations.values():
                 state = text
-                break
-            elif text in ["Alaska", "Alabama", "Arkansas", "American Samoa", "Arizona", "California", 
-                          "Colorado", "Connecticut", "District ", "of Columbia", "Delaware", "Florida", 
-                          "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", 
-                          "Kentucky", "Louisiana", "Massachusetts", "Maryland", "Maine", "Michigan", 
-                          "Minnesota", "Missouri", "Mississippi", "Montana", "North Carolina", "North Dakota", 
-                          "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York", "Ohio", 
-                          "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", 
-                          "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont", 
-                          "Washington", "Wisconsin", "West Virginia", "Wyoming"]:
-                state = text
-                break
+            # Check if text is a full name and map it to its abbreviation
+            elif text in entries.state_abbreviations:
+                state = entries.state_abbreviations[text]
+
+
         cost = 0
         costMax = 0
         price = 0
         count = 0
         for text in texts:
             price = 0
-            if (text[0]=="S" and text[1].isdigit()) or text[0]=="$":
+            if text[0] == "S" and text[1].isdigit() or (text[0] == "$") or (all(char.isdigit() for char in text)):
                 count+=1
                 price = int(text[1:])
                 cost+= price
@@ -91,27 +89,30 @@ def upload_file():
             cost = cost-costMax
         
         entriesRecieved = entries.entriesList
-        print(texts)
 
         
         found = False
         
         for i in entriesRecieved:
             if not found:
-                if texts[0] in i:
-                    procedure = texts[0]
-                    found = True
-                    break
+                for text in texts:
+                    if not found:
+                        if text in i:
+                            procedure = text
+                            found = True
+                            break
             else:
                 break
                 
                 
         texts = [procedure, state, cost]
         # Render the homepage with extracted texts
-        print(texts)
-        result = process_input(texts[0], texts[1], texts[2])
+        
+        texts[2] = str(texts[2])
+     
+        result = process_input(str(texts[0]), str(texts[1]), str(texts[2]))
         texts = [result]
-        return render_template('index.html', extracted_texts=texts)
+        return render_template('home.html', extracted_texts=texts)
     return 'No file uploaded', 400
 
 

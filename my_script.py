@@ -1,5 +1,5 @@
 import pandas as pd
-
+from tabulate import tabulate
 def process_input(input1, input2, input3):
     # Read the Excel sheet into a Pandas DataFrame
     df = pd.read_excel('inputData.xlsx')
@@ -27,12 +27,19 @@ def process_input(input1, input2, input3):
     # Return the result
     tableResult = createTable(input1, input2)
     
-    return f"The cost of {input1} in {input2} is {comparison_result} the average cost. (Average: ${average_cost:,.2f}, Your Input: ${input_cost:,.2f}) \n\n {tableResult}"
-
+    preString = f"The cost of your {input1} in {input2} is {comparison_result} the average cost. (Average: ${average_cost:,.2f}, Your Input: ${input_cost:,.2f})" 
+    if comparison_result == 'greater than':
+        preString+=" Visit the invoice interpretation guide to see how you can try to reduce your visit's invoice! "
+    return preString
 def createTable(procedureInput, stateInput):
     file_path = "inputDataCSV.csv"
     df = pd.read_csv(file_path)
-    df = df.loc[:, "Procedure": "Total"]
-    df = df[df["Procedure"].str.contains(procedureInput, case=False, na=False)]
-    df = df[df["State"] == stateInput]
-    return df
+    # Assuming "Cost" is the column name for the procedure's cost. Adjust if it's named differently.
+    columns_needed = ["State", "Total"]
+    df = df.loc[df["Procedure"].str.contains(procedureInput, case=False, na=False), columns_needed]
+    
+
+    tableVar = tabulate(df, headers='keys', tablefmt='pretty')
+
+    return tableVar
+
