@@ -10,6 +10,7 @@ pip install opencv-python
 pip install easyocr
 pip install pandas
 pip install openpyxl
+pip install tabulator
 
 then run python3 main.py
 
