@@ -6,10 +6,15 @@ Relevent tables/graphs are also provided to visualize the data
 To run the code, First 
 
 pip install flask
+
 pip install opencv-python
+
 pip install easyocr
+
 pip install pandas
+
 pip install openpyxl
+
 pip install tabulator
 
 then run python3 main.py
