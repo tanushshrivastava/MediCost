@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<style>
+    body, html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+h1 {
+    color: #005a87;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #333;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    width: 96%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.submit-button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.result-section {
+    margin-top: 20px;
+    background-color: #e7f5ff;
+    padding: 15px;
+    border-left: 5px solid #005a87;
+    border-radius: 5px;
+}
+.back-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: inline-block;
+    background-color: #005a87;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.back-link:hover {
+    background-color: #00415a;
+}
+
+.terms-list, .reimbursement-info {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+
+</style>
+
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scan Invoice Image</title>
+        <link rel="stylesheet" href="templates\index.css">
+    </head>
+<body>
+    <a href="/" class="back-link">Back to Healthcare Analysis</a>
+    <div class="container">
+        <h1>Scan Your Invoice</h1>
+        <p>Upload an image of your invoice.</p>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Extract">
+    </form>
+</div>
+    
+</body>
+</html>
+
+</html>
