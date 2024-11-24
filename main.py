@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request
+import torch
+import torch.backends
 import cv2
 import easyocr
 import numpy as np
 import pandas as pd
 from my_script import process_input
 import entries
+
 
 app = Flask(__name__)
 reader = easyocr.Reader(['en'])
